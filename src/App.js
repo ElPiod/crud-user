@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+// Dans App.js ou votre composant principal de routage
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Users from './Pages/users/Users';
+import ViewUser from './Pages/voir/ViewUser';
+import EditUser from './Pages/edit/EditUser';
+import AddUsers from './Pages/adduser/AddUsers';
+import NavBar from './Components/Navbar/NavBar'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <NavBar/>
+        <div className="content" style={{marginLeft: "60px"}}>
+          <Routes>
+              <Route path="/" element={<Users/>} />
+              <Route path="/add" element={<AddUsers/>} />
+              <Route path="/view/:id" element={<ViewUser/>} />
+              <Route path="/edit/:id" element={<EditUser updateUser={(updatedUser) => console.log(updatedUser)} />} />
+          </Routes>
+        </div>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
